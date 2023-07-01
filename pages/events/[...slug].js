@@ -105,7 +105,8 @@ function FilteredEventsPage(props) {
 
     const date = new Date(numYear, numMonth - 1);
     return (
-        <Fragment>            
+        <Fragment>
+            {pageHeadData}            
             <ResultsTitle date={date} />
             <EventList items={filteredEvents} />
         </Fragment>
