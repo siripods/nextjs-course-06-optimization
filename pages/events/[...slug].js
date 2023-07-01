@@ -6,6 +6,7 @@ import { Fragment, useEffect, useState } from "react";
 import Button from "../../components/ui/button";
 import ErrorAlert from "../../components/events/error-alert";
 import useSWRx from 'swr';
+import Head from 'next/head';
 
 function FilteredEventsPage(props) {
     console.log("--- FilteredEventsPage ---");
@@ -41,8 +42,18 @@ function FilteredEventsPage(props) {
         }
     }, [data]);
 
+    let pageHeadData = (<Head>
+    <title>Filtered Events</title>
+    <meta name="description" content="A list of filtered events">
+    </meta>
+</Head>);
+
     if(!loadedEvents) {
-        return <p className='center'>Loading...</p>
+        return 
+        <Fragment>
+            {pageHeadData}
+            <p className='center'>Loading...</p>
+        </Fragment>
     }
 
     const filteredYear = filterData[0];
@@ -51,9 +62,19 @@ function FilteredEventsPage(props) {
     //transform to number, using '+' 
     const numYear = +filteredYear;
     const numMonth = +filteredMonth;
+    
+    pageHeadData = (
+        <Head>
+                    <title>Filtered Events</title>
+                    <meta name="description" content={`All events for ${numMonth}/${numYear}`}>
+                    </meta>
+                </Head>
+    );
+
     if(isNaN(numYear) || isNaN(numMonth) || numYear < 2021 || numMonth < 1 || numMonth > 12 || error) {
         return (
             <Fragment>
+                {pageHeadData}
                 <ErrorAlert>
                     <p>Invalid Filter, please adjust values.</p>
                 </ErrorAlert>
@@ -84,7 +105,7 @@ function FilteredEventsPage(props) {
 
     const date = new Date(numYear, numMonth - 1);
     return (
-        <Fragment>
+        <Fragment>            
             <ResultsTitle date={date} />
             <EventList items={filteredEvents} />
         </Fragment>

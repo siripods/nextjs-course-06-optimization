@@ -6,6 +6,7 @@ import EventLogistics from '../../components/event-detail/event-logistics';
 import EventContent from '../../components/event-detail/event-content';
 import ErrorAlert from "../../components/events/error-alert";
 import { getEventById, getAllEvents, getFeaturedEvents } from '../../helpers/api-util';
+import Head from 'next/head';
 
 function EventDetailPage(props) {
     const event = props.selectedEvent;
@@ -18,6 +19,11 @@ function EventDetailPage(props) {
     //console.log(event);
     return (
         <Fragment>
+            <Head>
+                <title>{event.title}</title>
+                <meta name="description" content="Find a lot of greate evnets that allow you to evolve...">
+                </meta>
+            </Head>
             <EventSummary title={event.title}/>
             <EventLogistics date={event.date} address={event.location} image={event.image} imageAlt={event.title} />
             <EventContent>

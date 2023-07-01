@@ -1,11 +1,17 @@
 //import { getFeaturedEvents } from "../dummy-data";
 import EventList from "../components/events/event-list";
 import { getFeaturedEvents } from "../helpers/api-util";
+import Head from 'next/head';
 
 function HomePage(props) {
     
     return (
         <div>
+            <Head>
+                <title>Next JS Events</title>
+                <meta name="description" content="Find a lot of greate evnets that allow you to evolve...">
+                </meta>
+            </Head>
             <EventList items={props.events} />
         </div>
     );
