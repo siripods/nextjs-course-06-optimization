@@ -45,8 +45,7 @@ function FilteredEventsPage(props) {
     let pageHeadData = (<Head>
     <title>Filtered Events</title>
     <meta name="description" content="A list of filtered events">
-    </meta>
-</Head>);
+    </meta></Head>);
 
     if(!loadedEvents) {
         return 
@@ -74,7 +73,6 @@ function FilteredEventsPage(props) {
     if(isNaN(numYear) || isNaN(numMonth) || numYear < 2021 || numMonth < 1 || numMonth > 12 || error) {
         return (
             <Fragment>
-                {pageHeadData}
                 <ErrorAlert>
                     <p>Invalid Filter, please adjust values.</p>
                 </ErrorAlert>
@@ -94,6 +92,7 @@ function FilteredEventsPage(props) {
     if(!filteredEvents || filteredEvents.length === 0) {
         return (
         <Fragment>
+             {pageHeadData}  
             <ErrorAlert>
                 <p>No event found for the chosen filter.</p>
             </ErrorAlert>
